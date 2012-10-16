@@ -11,8 +11,7 @@ class GGraph(object):
     def __init__(self, n=3, edge_p=.2):
         """
         [n]: int representing the number of nodes in the graph
-        [edge_p]: the probability that a given edge exists (the lower you make this number,
-                  the fewer edges you are likely to have in the resultant graph)
+        [edge_p]: the probability that a given edge exists
         """
         self.n = n
         self.edge_p = edge_p
@@ -36,7 +35,7 @@ class GGraph(object):
         for edge in possible_edges:
             a,b = edge
             # randomly assign edges
-            if (random.random() > self.edge_p):
+            if (random.random() < self.edge_p):
                 self.neighbor_list[a].append(b)
                 self.neighbor_list[b].append(a)
                 self.edge_list.append((a,b))
@@ -74,16 +73,16 @@ class GGraph(object):
         try:
             import networkx
         except ImportError:
-            print "Please install networkx via 'easy_install networkx', 'pip install networkx' or some other method."
+            print "Please install networkx via 'easy_install networkx', 'pip install networkx', or some other method."
             print "You will not have access to the full functionality of this module until then"
-            sys.exit(0)
+            sys.exit(1)
 
         try:
             import matplotlib.pyplot as plt
         except ImportError:
-            print "Please install matplotlib via 'easy_install matplotlib', 'pip install matplotlib' or some other method."
+            print "Please install matplotlib via 'easy_install matplotlib', 'pip install matplotlib', or some other method."
             print "You will not have access to the full functionality of this module until then"
-            sys.exit(0)
+            sys.exit(1)
 
         string_edges = map(lambda x: "%s %s" % (x[0], x[1]), self.edge_list)
         graph = networkx.parse_edgelist(string_edges)
