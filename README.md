@@ -7,6 +7,6 @@ Usage
 -----
 ```python
 G = GGraph()
-G._make_network
+G._make_network()
 G.show()
 ```
